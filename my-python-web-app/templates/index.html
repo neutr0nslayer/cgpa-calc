@@ -4,15 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CGPA Calculator</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
-    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   </head>
   <body>
     <div class="container">
       <h1>CGPA Calculator</h1>
-      <form action="/calculate" method="POST">
+      <!-- Form posts to "/" -->
+      <form action="/" method="POST">
         <label for="current_cgpa">Current CGPA:</label>
         <input
           type="number"
@@ -37,8 +35,17 @@
         <button type="submit">Calculate CGPA</button>
       </form>
 
+      <!-- Show Updated CGPA in a separate output field if it exists -->
       {% if updated_cgpa is not none %}
-      <h2>Updated CGPA: {{ '%.2f'|format(updated_cgpa) }}</h2>
+      <div class="result">
+        <label for="result">Updated CGPA:</label>
+        <input
+          type="text"
+          id="result"
+          value="{{ '{:.2f}'.format(updated_cgpa) }}"
+          readonly
+        />
+      </div>
       {% endif %}
     </div>
   </body>

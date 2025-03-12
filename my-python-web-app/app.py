@@ -19,6 +19,7 @@ def index():
         new_grade_point = float(request.form["new_grade_point"])
         
         updated_cgpa = calculate_cgpa(current_cgpa, total_credits, course_credits, old_grade_point, new_grade_point)
+        # The updated CGPA will now pre-fill the "current_cgpa" field.
         return render_template("index.html", updated_cgpa=updated_cgpa)
     
     return render_template("index.html", updated_cgpa=None)
