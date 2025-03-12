@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CGPA Calculator</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>CGPA Calculator</h1>
+      <form action="/calculate" method="POST">
+        <label for="current_cgpa">Current CGPA:</label>
+        <input
+          type="number"
+          step="0.01"
+          name="current_cgpa"
+          value="{{ '{:.2f}'.format(updated_cgpa) if updated_cgpa is not none else '' }}"
+          required
+        />
+
+        <label for="total_credits">Total Credits:</label>
+        <input type="number" name="total_credits" required />
+
+        <label for="course_credits">Course Credits:</label>
+        <input type="number" name="course_credits" required />
+
+        <label for="old_grade_point">Old Grade Point:</label>
+        <input type="number" step="0.01" name="old_grade_point" required />
+
+        <label for="new_grade_point">New Grade Point:</label>
+        <input type="number" step="0.01" name="new_grade_point" required />
+
+        <button type="submit">Calculate CGPA</button>
+      </form>
+
+      {% if updated_cgpa is not none %}
+      <h2>Updated CGPA: {{ '%.2f'|format(updated_cgpa) }}</h2>
+      {% endif %}
+    </div>
+  </body>
+</html>
